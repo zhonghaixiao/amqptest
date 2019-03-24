@@ -8,9 +8,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-@Component
-	@RabbitListener(queues = "${mq.ingate.queue}")
-	public class IngateConsumer {
+//@Component
+@RabbitListener(queues = "${mq.ingate.queue}")
+public class IngateConsumer {
 
 	private static Logger logger = LoggerFactory.getLogger("gateway_mq");
 

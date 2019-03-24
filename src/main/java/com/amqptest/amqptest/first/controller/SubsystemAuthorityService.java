@@ -4,6 +4,7 @@ import com.amqptest.amqptest.first.dao.AccountRepository;
 import com.amqptest.amqptest.first.domain.Account;
 import com.amqptest.amqptest.rabbit.RabbitSender;
 import com.amqptest.amqptest.rabbit.TradePayModelRes;
+import com.amqptest.amqptest.rabbit.tut1.Tut1Sender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,9 @@ public class SubsystemAuthorityService
 
     @Autowired
     RabbitSender sender;
+
+    @Autowired
+    Tut1Sender tut1Sender;
 
     @GetMapping("/admin/info")
     public String getAdminInfo(String currentAccount)
@@ -32,7 +36,11 @@ public class SubsystemAuthorityService
 
     @PostMapping("send")
     public Object seedMsg(){
-        sender.sendIngateQueue(TradePayModelRes.builder().outTradeNo(123).body("test msg").build());
+        for (int i = 0; i < 1000; i++){
+            tut1Sender.send();
+        }
+//        tut1Sender.send();
+//        sender.sendIngateQueue(TradePayModelRes.builder().outTradeNo(123).body("test msg").build());
         return true;
     }
 

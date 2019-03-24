@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 
 /**
-	 * RabbitMQ消息发送类
-	 */
-	@Component
-	public class RabbitSender implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {
+ * RabbitMQ消息发送类
+ */
+@Component
+public class RabbitSender implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {
 
 	private static final Logger logger = LoggerFactory.getLogger("gateway_mq");
 
@@ -43,16 +43,26 @@ import javax.annotation.PostConstruct;
 	}
 
 	@Override
-	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-		if (ack) {
-			logger.info("消息已确认 cause:{} - {}", cause, correlationData.toString());
-		} else {
-			logger.info("消息未确认 cause:{} - {}", cause, correlationData.toString());
-		}
+	public void confirm(CorrelationData correlationData, boolean b, String s) {
+
 	}
 
 	@Override
-	public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-		logger.info("消息被退回 {}", message.toString());
+	public void returnedMessage(Message message, int i, String s, String s1, String s2) {
+
 	}
+
+//	@Override
+//	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+//		if (ack) {
+//			logger.info("消息已确认 cause:{} - {}", cause, correlationData.toString());
+//		} else {
+//			logger.info("消息未确认 cause:{} - {}", cause, correlationData.toString());
+//		}
+//	}
+
+//	@Override
+//	public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+//		logger.info("消息被退回 {}", message.toString());
+//	}
 }
